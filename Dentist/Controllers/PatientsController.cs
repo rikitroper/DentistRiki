@@ -18,49 +18,58 @@ namespace Dentist.Controllers
 
         // GET: api/<PatientsController>
         [HttpGet]
-        public IEnumerable<Patient> Get()
+        public ActionResult Get()
         {
-           return _context.GetList();
+            return Ok(_context.GetList());
         }
 
-        // GET api/<PatientsController>/5
-        //[HttpGet("{id}")]
-        //public  Patient Get(string id)
-        //{
-        //    var index= patients.FindIndex(e=> e.Id == id);
-        //    return index;
+        [HttpGet("{id}")]
+        public ActionResult Get(string id)
+        {
+            var student = _context.Get(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+            return Ok(student);
+        }
 
-        //}
+
+
 
         // POST api/<PatientsController>
         [HttpPost]
-        public Patient Post([FromBody] Patient value)
+        public ActionResult Post([FromBody] Patient p)
         {
-            _context.GetList().Add(value);
-            return value;
+            var student = _context.Get(p.Id);
+            if (student == null)
+            {
+                return Ok(_context.Add(p));
+            }
+            return Conflict();
+
         }
 
         // PUT api/<PatientsController>/5
         [HttpPut("{id}")]
         public Patient Put(string id, [FromBody] Patient value)
         {
-            var index = _context.GetList().FindIndex(e => e.Id == id);
-            _context.GetList()[index].Id = value.Id;
-            _context.GetList()[index].Name = value.Name;
-            _context.GetList()[index].DateBorn = value.DateBorn;
-            _context.GetList()[index].Age = value.Age;
-            return _context.GetList()[index];
+            var index = _context.Get(id);
+            index.Id = value.Id;
+            index.Name = value.Name;
+            index.DateBorn = value.DateBorn;
+            index.Age = value.Age;
+            return index;
         }
 
 
-      
 
         // DELETE api/<EventsController>/5
         [HttpDelete("{id}")]
         public void Delete(string id)
         {
-            var index = _context.GetList().FindIndex(e => e.Id == id);
-            _context.GetList()[index].Status = false;
+            var index = _context.Get(id);
+            index.Status = false;
         }
     }
 }
