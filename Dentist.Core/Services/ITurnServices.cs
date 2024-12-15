@@ -9,6 +9,10 @@ namespace Dentist.Core.Services
 {
     public interface ITurnServices
     {
-        public List<turn> getAll();
+        public IEnumerable<turn> getAll();
+        public turn get(int id);
+        public turn add(turn turn);
+        public void delete(int id);
+        public void update(int IdPatient, DateTime hour, DateTime date);
     }
 }

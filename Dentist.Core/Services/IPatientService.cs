@@ -12,7 +12,7 @@ namespace Dentist.Core.Services
         public IEnumerable<Patient> GetList();
 
 
-        public Patient Get(string id);
+        public Patient Get(int id);
 
         public Patient Add(Patient patient);
     }

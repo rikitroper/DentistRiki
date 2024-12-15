@@ -11,7 +11,7 @@ namespace Dentist.Core.Repositories
     {
         public IEnumerable<Patient> GetAll();
 
-        public Patient Get(string id);
+        public Patient Get(int id);
 
         public Patient Add(Patient patient);
 

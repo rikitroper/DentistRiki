@@ -20,7 +20,7 @@ namespace Dentist.Data.Repositories
         {
             return _context.patients.Where(s => !string.IsNullOrEmpty(s.Name));
         }
-        public Patient Get(string id)
+        public Patient Get(int id)
         {
             return _context.patients.FirstOrDefault(s => s.Id == id);
         }

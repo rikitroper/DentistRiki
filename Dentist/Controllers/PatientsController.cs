@@ -24,7 +24,7 @@ namespace Dentist.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult Get(string id)
+        public ActionResult Get(int id)
         {
             var student = _context.Get(id);
             if (student == null)
@@ -52,7 +52,7 @@ namespace Dentist.Controllers
 
         // PUT api/<PatientsController>/5
         [HttpPut("{id}")]
-        public Patient Put(string id, [FromBody] Patient value)
+        public Patient Put(int id, [FromBody] Patient value)
         {
             var index = _context.Get(id);
             index.Id = value.Id;
@@ -66,7 +66,7 @@ namespace Dentist.Controllers
 
         // DELETE api/<EventsController>/5
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public void Delete(int id)
         {
             var index = _context.Get(id);
             index.Status = false;

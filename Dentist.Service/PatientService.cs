@@ -25,7 +25,7 @@ namespace Dentist.Service
             return _PatientRepository.GetAll();
 
         }
-        public Patient Get(string id)
+        public Patient Get(int id)
         {
             return _PatientRepository.Get(id);
         }
