@@ -1,5 +1,6 @@
 ﻿
 using Dentist.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,11 @@ namespace Dentist.Data.Repositories
         {
             return _context.patients.Where(s => !string.IsNullOrEmpty(s.Name));
         }
+
+        public async Task<IEnumerable<Patient>> GetAllAsync()
+        {
+            return await _context.patients.Where(s => !string.IsNullOrEmpty(s.Name)).Include(s => s.Id).ToListAsync();
+        }
         public Patient Get(int id)
         {
             return _context.patients.FirstOrDefault(s => s.Id == id);
@@ -29,6 +35,12 @@ namespace Dentist.Data.Repositories
         {
             _context.patients.Add(patient);
             _context.SaveChanges();
+            return patient;
+        }
+        public async Task<Patient> AddAsync(Patient patient)
+        {
+            _context.patients.Add(patient);
+            await _context.SaveChangesAsync();
             return patient;
         }
     }

@@ -2,6 +2,7 @@
 
 
 
+using Dentist.Core;
 using Dentist.Core.Repositories;
 using Dentist.Core.Services;
 using Dentist.Data;
@@ -39,6 +40,7 @@ builder.Services.AddScoped<ITurnServices, TurnService>();
 
 //builder.Services.AddSingleton<DataContext>();
 builder.Services.AddDbContext<DataContext>();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 
